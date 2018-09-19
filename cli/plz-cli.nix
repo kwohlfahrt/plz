@@ -25,9 +25,11 @@ let
 
   paramiko_2_4_2 = python3.pkgs.callPackage ./paramiko.nix {};
 
+  timestamp = builtins.replaceStrings ["\n"] [""] (builtins.readFile ../STABLE_BUILD_TIMESTAMP);
+
 in buildPythonApplication rec {
   name = "${pname}-${version}";
-  version = "0.1.0";
+  version = "0.1.${timestamp}";
   pname = "plz-cli";
 
   propagatedBuildInputs = [
